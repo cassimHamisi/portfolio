@@ -5,6 +5,30 @@ import nodemailer from "nodemailer";
 // It returns a preview URL you can open to view the message.
 export const runtime = "nodejs";
 
+// Cache the test account and transporter across requests during dev to
+// avoid creating a new Ethereal account every time.
+let cachedTestAccount: nodemailer.TestAccount | null = null;
+let cachedTransporter: nodemailer.Transporter | null = null;
+
+async function getTestTransporter() {
+  if (cachedTransporter && cachedTestAccount) return { testAccount: cachedTestAccount, transporter: cachedTransporter };
+
+  const testAccount = await nodemailer.createTestAccount();
+  const transporter = nodemailer.createTransport({
+    host: testAccount.smtp.host,
+    port: testAccount.smtp.port,
+    secure: testAccount.smtp.secure,
+    auth: {
+      user: testAccount.user,
+      pass: testAccount.pass,
+    },
+  });
+
+  cachedTestAccount = testAccount;
+  cachedTransporter = transporter;
+  return { testAccount, transporter };
+}
+
 export async function POST(request: NextRequest) {
   // Block in production for safety
   if (process.env.NODE_ENV === "production") {
@@ -16,20 +40,9 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json().catch(() => ({}));
-    const to =
-      (body?.to as string) || process.env.SMTP_FROM || "recipient@example.com";
+    const to = (body?.to as string) || process.env.SMTP_FROM || "recipient@example.com";
 
-    // Create a test account (Ethereal) and transporter
-    const testAccount = await nodemailer.createTestAccount();
-    const transporter = nodemailer.createTransport({
-      host: testAccount.smtp.host,
-      port: testAccount.smtp.port,
-      secure: testAccount.smtp.secure,
-      auth: {
-        user: testAccount.user,
-        pass: testAccount.pass,
-      },
-    });
+    const { testAccount, transporter } = await getTestTransporter();
 
     const info = await transporter.sendMail({
       from: `Portfolio Test <${testAccount.user}>`,
@@ -40,7 +53,16 @@ export async function POST(request: NextRequest) {
 
     const previewUrl = nodemailer.getTestMessageUrl(info);
 
-    return NextResponse.json({ ok: true, previewUrl }, { status: 200 });
+    // Pick a few info fields that are serializable and useful for debugging
+    const payload = {
+      accepted: (info as any).accepted,
+      rejected: (info as any).rejected,
+      envelope: (info as any).envelope,
+      messageId: (info as any).messageId,
+      response: (info as any).response,
+    };
+
+    return NextResponse.json({ ok: true, previewUrl, info: payload }, { status: 200 });
   } catch (err) {
     console.error("Test email error:", err);
     return NextResponse.json(

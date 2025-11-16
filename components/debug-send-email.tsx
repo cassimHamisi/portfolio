@@ -5,6 +5,7 @@ import React, { useState } from "react";
 export default function DebugSendEmail() {
   const [status, setStatus] = useState<string | null>(null);
   const [url, setUrl] = useState<string | null>(null);
+  const [payload, setPayload] = useState<any | null>(null);
 
   async function sendTest() {
     setStatus("sending");
@@ -15,11 +16,13 @@ export default function DebugSendEmail() {
         body: JSON.stringify({}),
       });
       const json = await res.json();
+      console.log('test-email response', json)
+      setPayload(json)
       if (res.ok) {
         setUrl(json.previewUrl || null);
-        setStatus("sent");
+        setStatus('sent')
       } else {
-        setStatus(json.error || "error");
+        setStatus(json.error || 'error')
       }
     } catch (err) {
       setStatus("network error");
@@ -49,6 +52,11 @@ export default function DebugSendEmail() {
             >
               Open
             </a>
+          </div>
+        )}
+        {payload && (
+          <div className="mt-2 text-xs">
+            <pre className="whitespace-pre-wrap max-w-xs text-xs">{JSON.stringify(payload, null, 2)}</pre>
           </div>
         )}
       </div>
