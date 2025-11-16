@@ -1,0 +1,61 @@
+[
+  {
+    "id": "dijkstras",
+    "title": "Dijkstras UI & API",
+    "shortDescription": "Flutter frontend + Node.js API demonstrating Dijkstra's algorithm with interactive simulation and step-by-step visualization.",
+    "longDescription": "A full-stack project that implements and visualizes Dijkstra's shortest-path algorithm. The Flutter UI allows users to build graphs, assign weights, and step through the algorithm while animated paths update in real time. The Node.js API provides graph endpoints, simulation orchestration, and persistence for saved graphs. This project is ideal for demonstrating algorithmic thinking, performance considerations, and frontend–backend coordination in real applications.",
+    "tech": ["Flutter", "Dart", "Node.js", "Express", "WebSockets", "Algorithm Visualization"],
+    "github": [
+      "https://github.com/cassimHamisi/dijkstrasui",
+      "https://github.com/cassimHamisi/dijkstrasapi"
+    ],
+    "liveDemo": null,
+    "images": [
+      "/placeholder.svg?height=300&width=400"
+    ],
+    "year": 2024,
+    "tags": ["algorithms", "frontend", "backend", "visualization"]
+  },
+  {
+    "id": "flutter-chat",
+    "title": "Flutter Chat App",
+    "shortDescription": "A real-time chat application built with Flutter, WebSockets, and Firebase for presence and notifications.",
+    "longDescription": "A production-minded chat app built in Flutter that demonstrates real-time messaging via WebSockets and cloud features via Firebase (authentication, push notifications, and presence). The app showcases connection management, message syncing, typing indicators, and resilient offline behavior. Suitable to highlight experience with realtime systems, sockets, and mobile UX patterns.",
+    "tech": ["Flutter", "Dart", "WebSockets", "Firebase", "Real-time Messaging", "Push Notifications"],
+    "github": ["https://github.com/cassimHamisi/chat-app"],
+    "liveDemo": null,
+    "images": [
+      "/placeholder.svg?height=300&width=400"
+    ],
+    "year": 2023,
+    "tags": ["realtime", "messaging", "mobile"]
+  },
+  {
+    "id": "renthub",
+    "title": "Rent Hub",
+    "shortDescription": "Tenant & landlord management app for billing, allocations, and property workflows (mobile-first).",
+    "longDescription": "Rent Hub is a real estate management app focused on tenant billing, automated allocations, and reporting. Built for mobile-first workflows used by property managers and tenants, it includes billing engines, transaction history, and administrative dashboards. The app demonstrates complex domain logic, offline-first data sync, and a polished mobile UX suitable for large-scale deployment.",
+    "tech": ["React Native", "TypeScript", "Node.js", "PostgreSQL", "Billing Engine", "Mobile UX"],
+    "github": null,
+    "liveDemo": "https://play.google.com/store/apps/details?id=com.kberen.renthub&hl=en",
+    "images": [
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AOGD5Lq42WZCdb0nIQHyQ26UWaK9W5.png"
+    ],
+    "year": 2022,
+    "tags": ["proptech", "billing", "mobile"]
+  },
+  {
+    "id": "virtual-wallet",
+    "title": "Virtual Wallet Management System",
+    "shortDescription": "Web wallet management system with balance sheets, transaction allocation, and wallet flows.",
+    "longDescription": "A web-based virtual wallet system that exposes balance sheet views, transaction allocation UIs, and wallet lifecycle management. Built to demonstrate secure transfer flows, user-facing transaction histories, and administrative reconciliation tools. Includes mock/live integrations for payment flows and an emphasis on performance and accessibility.",
+    "tech": ["React", "TypeScript", "Node.js", "REST APIs", "Wallet Architecture", "Transaction Management"],
+    "github": null,
+    "liveDemo": "https://wallet.kberen.com/",
+    "images": [
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-NymszQUJBGB7ScXVEKiSQgIBOJKvKz.png"
+    ],
+    "year": 2024,
+    "tags": ["wallet", "fintech", "dashboard"]
+  }
+]

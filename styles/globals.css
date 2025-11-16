@@ -1,0 +1,140 @@
+@import 'tailwindcss';
+
+:root {
+  --background: 0deg 0% 100%;
+  --foreground: 0deg 0% 8.5%;
+  --card: 0deg 0% 100%;
+  --card-foreground: 0deg 0% 8.5%;
+  --muted: 0deg 0% 96%;
+  --muted-foreground: 0deg 0% 55%;
+  --accent: 220deg 90% 56%;
+  --accent-foreground: 0deg 0% 98%;
+  --border: 0deg 0% 92%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 0deg 0% 8.5%;
+  --foreground: 0deg 0% 98%;
+  --card: 0deg 0% 8.5%;
+  --card-foreground: 0deg 0% 98%;
+  --muted: 0deg 0% 16%;
+  --muted-foreground: 0deg 0% 70%;
+  --accent: 220deg 90% 66%;
+  --accent-foreground: 0deg 0% 98%;
+  --border: 0deg 0% 16%;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 64rem;
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .gradient-text {
+    background: linear-gradient(to right, hsl(220, 90%, 56%), hsl(220, 90%, 40%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-heading {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  @media (min-width: 768px) {
+    .section-heading {
+      font-size: 3rem;
+      line-height: 3.5rem;
+    }
+  }
+
+  .section-subheading {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: hsl(var(--muted-foreground));
+    max-width: 42rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-subheading {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+  }
+
+  .glass {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .dark .glass {
+    background-color: rgba(15, 23, 42, 0.5);
+    border-color: rgba(100, 116, 139, 0.2);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
