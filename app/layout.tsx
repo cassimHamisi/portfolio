@@ -1,9 +1,7 @@
+import DebugSendEmail from "@/components/debug-send-email";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import "../styles/globals.css";
-import DebugSendEmail from "@/components/debug-send-email";
-
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 

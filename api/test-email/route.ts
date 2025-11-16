@@ -11,7 +11,8 @@ let cachedTestAccount: nodemailer.TestAccount | null = null;
 let cachedTransporter: nodemailer.Transporter | null = null;
 
 async function getTestTransporter() {
-  if (cachedTransporter && cachedTestAccount) return { testAccount: cachedTestAccount, transporter: cachedTransporter };
+  if (cachedTransporter && cachedTestAccount)
+    return { testAccount: cachedTestAccount, transporter: cachedTransporter };
 
   const testAccount = await nodemailer.createTestAccount();
   const transporter = nodemailer.createTransport({
@@ -40,7 +41,8 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json().catch(() => ({}));
-    const to = (body?.to as string) || process.env.SMTP_FROM || "recipient@example.com";
+    const to =
+      (body?.to as string) || process.env.SMTP_FROM || "recipient@example.com";
 
     const { testAccount, transporter } = await getTestTransporter();
 
@@ -62,7 +64,10 @@ export async function POST(request: NextRequest) {
       response: (info as any).response,
     };
 
-    return NextResponse.json({ ok: true, previewUrl, info: payload }, { status: 200 });
+    return NextResponse.json(
+      { ok: true, previewUrl, info: payload },
+      { status: 200 }
+    );
   } catch (err) {
     console.error("Test email error:", err);
     return NextResponse.json(
