@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+// This route is development-only and sends an Ethereal test email.
+// It returns a preview URL you can open to view the message.
 export const runtime = "nodejs";
 
 // Cache the test account and transporter across requests during dev to
@@ -29,6 +31,7 @@ async function getTestTransporter() {
 }
 
 export async function POST(request: NextRequest) {
+  // Block in production for safety
   if (process.env.NODE_ENV === "production") {
     return NextResponse.json(
       { error: "Not allowed in production" },
@@ -52,6 +55,7 @@ export async function POST(request: NextRequest) {
 
     const previewUrl = nodemailer.getTestMessageUrl(info);
 
+    // Pick a few info fields that are serializable and useful for debugging
     const payload = {
       accepted: (info as any).accepted,
       rejected: (info as any).rejected,
