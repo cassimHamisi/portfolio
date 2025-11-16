@@ -24,6 +24,7 @@ A production-ready, modern portfolio website built with Next.js 16, TypeScript, 
 ## Installation
 
 ### Prerequisites
+
 - Node.js 18+ and npm/pnpm/yarn
 
 ### Steps
@@ -37,9 +38,13 @@ A production-ready, modern portfolio website built with Next.js 16, TypeScript, 
 2. **Install dependencies**
    \`\`\`bash
    npm install
+
    # or
+
    pnpm install
+
    # or
+
    yarn install
    \`\`\`
 
@@ -47,8 +52,9 @@ A production-ready, modern portfolio website built with Next.js 16, TypeScript, 
    \`\`\`bash
    cp .env.example .env.local
    \`\`\`
-   
+
    Edit `.env.local` with your actual values:
+
    - **SMTP Configuration**: Set up using Gmail, SendGrid, Mailtrap, or any SMTP provider
    - For Gmail: Use [App Password](https://support.google.com/accounts/answer/185833) (not your regular password)
 
@@ -56,7 +62,7 @@ A production-ready, modern portfolio website built with Next.js 16, TypeScript, 
    \`\`\`bash
    npm run dev
    \`\`\`
-   
+
    Open [http://localhost:3000](http://localhost:3000)
 
 ## Email Configuration
@@ -90,6 +96,44 @@ A production-ready, modern portfolio website built with Next.js 16, TypeScript, 
    SMTP_FROM=noreply@yourdomain.com
    \`\`\`
 
+   ### Option 3: Ethereal (Development-only, no signup)
+
+   Ethereal is a fake SMTP service useful for local development and automated tests. It doesn't deliver real emails — instead it provides a preview URL for each sent message. This avoids sending test mail to real addresses while you develop.
+
+   Example usage with nodemailer (server-side, development):
+
+   ```ts
+   import nodemailer from "nodemailer";
+
+   async function sendTest() {
+     const testAccount = await nodemailer.createTestAccount();
+     const transporter = nodemailer.createTransport({
+       host: testAccount.smtp.host,
+       port: testAccount.smtp.port,
+       secure: testAccount.smtp.secure,
+       auth: {
+         user: testAccount.user,
+         pass: testAccount.pass,
+       },
+     });
+
+     const info = await transporter.sendMail({
+       from: "test@example.com",
+       to: "recipient@example.com",
+       subject: "Hello from Ethereal",
+       text: "This is a test",
+     });
+
+     console.log("Preview URL:", nodemailer.getTestMessageUrl(info));
+   }
+   ```
+
+   Use Ethereal when developing locally. When deploying to Vercel or another host, switch to Mailtrap or your real SMTP provider by setting the variables in `.env.local` or in your hosting environment's secret store.
+
+   ### Important: do not commit secrets
+
+   Always copy `.env.example` to `.env.local` and fill in your private credentials there. Do not commit `.env.local` or any file containing real secrets. On Vercel, configure the same variables under Project → Settings → Environment Variables so they remain secure.
+
 ### Option 3: SendGrid, AWS SES, etc.
 
 Refer to your provider's SMTP documentation and update `.env.local` accordingly.
@@ -102,16 +146,16 @@ Edit `data/projects.json` to add, remove, or modify projects:
 
 \`\`\`json
 {
-  "id": "unique-id",
-  "title": "Project Title",
-  "shortDescription": "Brief description",
-  "longDescription": "Detailed description",
-  "tech": ["Tech1", "Tech2"],
-  "github": "https://github.com/...",
-  "liveDemo": "https://...",
-  "images": ["/path/to/image.jpg"],
-  "year": 2024,
-  "tags": ["tag1", "tag2"]
+"id": "unique-id",
+"title": "Project Title",
+"shortDescription": "Brief description",
+"longDescription": "Detailed description",
+"tech": ["Tech1", "Tech2"],
+"github": "https://github.com/...",
+"liveDemo": "https://...",
+"images": ["/path/to/image.jpg"],
+"year": 2024,
+"tags": ["tag1", "tag2"]
 }
 \`\`\`
 
@@ -126,6 +170,7 @@ Edit `data/projects.json` to add, remove, or modify projects:
 ### Theme Colors
 
 Edit `app/globals.css` to customize the color scheme. The design uses:
+
 - **Primary**: `--color-accent` (#0d47a1)
 - **Success**: `--color-success` (#4caf50)
 - **Light**: `--color-background` (#ffffff)
@@ -148,21 +193,22 @@ npm run start
 ### Other Platforms
 
 The project is a standard Next.js app compatible with any Node.js hosting:
+
 - **Netlify**: Add `next-on-netlify` adapter
 - **AWS Amplify**: Connect GitHub repo
 - **DigitalOcean**: Deploy using App Platform
 
 ## Environment Variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `SMTP_HOST` | Yes | SMTP server hostname |
-| `SMTP_PORT` | Yes | SMTP port (usually 587 or 465) |
-| `SMTP_SECURE` | No | Use TLS (true/false) |
-| `SMTP_USER` | Yes | SMTP username/email |
-| `SMTP_PASS` | Yes | SMTP password/token |
-| `SMTP_FROM` | No | From email address |
-| `NEXT_PUBLIC_SITE_URL` | No | Site URL for links |
+| Variable               | Required | Description                    |
+| ---------------------- | -------- | ------------------------------ |
+| `SMTP_HOST`            | Yes      | SMTP server hostname           |
+| `SMTP_PORT`            | Yes      | SMTP port (usually 587 or 465) |
+| `SMTP_SECURE`          | No       | Use TLS (true/false)           |
+| `SMTP_USER`            | Yes      | SMTP username/email            |
+| `SMTP_PASS`            | Yes      | SMTP password/token            |
+| `SMTP_FROM`            | No       | From email address             |
+| `NEXT_PUBLIC_SITE_URL` | No       | Site URL for links             |
 
 ## Performance Optimization
 
@@ -193,6 +239,7 @@ Test the contact form:
 ## SEO
 
 The portfolio includes:
+
 - Dynamic meta tags with project titles/descriptions
 - Open Graph tags for social sharing
 - Structured data (JSON-LD)
@@ -210,17 +257,20 @@ The portfolio includes:
 ## Troubleshooting
 
 ### Email not sending
+
 1. Check SMTP credentials in `.env.local`
 2. Verify firewall/ISP allows SMTP connections
 3. Check email provider's activity logs
 4. Test with Mailtrap first for debugging
 
 ### Images not loading
+
 1. Ensure images exist in `/public/images/`
 2. Check image paths in `data/projects.json`
 3. Verify image formats are supported (jpg, png, webp)
 
 ### Dark mode not persisting
+
 1. Clear localStorage in DevTools
 2. Check browser's privacy settings
 3. Ensure localStorage is not disabled
