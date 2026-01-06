@@ -1,273 +1,155 @@
 # Cassim Hamisi - Software Engineer Portfolio
 
-A production-ready, modern portfolio website built with Next.js 16, TypeScript, Tailwind CSS, and shadcn/ui.
+Welcome to my personal portfolio website. I'm a Software Engineer specializing in **real-time systems** and **mobile-first architecture**. This site showcases my projects, skills, and experience in building scalable backends and responsive applications.
 
-## Features
+🔗 **Live Site**: [cassimhamisi.dev](https://cassimhamisi.dev)  
+📧 **Email**: cassimjumahamisi2@gmail.com  
+💼 **LinkedIn**: [cassim-hamisi](https://www.linkedin.com/in/cassim-hamisi)  
+🐙 **GitHub**: [@cassimHamisi](https://github.com/cassimHamisi)
 
-- **Responsive Design**: Mobile-first approach optimized for all screen sizes
-- **Dark Mode**: Built-in theme switching with localStorage persistence
-- **SEO Optimized**: Metadata, Open Graph tags, and structured data
-- **Contact Form**: Server-side email integration with nodemailer
-- **Project Showcase**: Dynamic project cards with modal details
-- **Smooth Animations**: Subtle transitions and interactions
-- **Accessible**: WCAG 2.1 compliant markup and ARIA labels
-- **Performance**: Optimized images, code splitting, and fast load times
+## About This Project
+
+This is a modern, production-ready portfolio website built with cutting-edge web technologies. It demonstrates my expertise in full-stack development, responsive design, and user experience.
+
+### Key Features
+
+✨ **Modern Design**: Clean, minimalist interface with smooth animations  
+📱 **Fully Responsive**: Optimized for mobile, tablet, and desktop  
+🌙 **Dark Mode**: Built-in theme switching with localStorage persistence  
+📧 **Contact Form**: Server-side email integration for inquiries  
+♿ **Accessible**: WCAG 2.1 compliant with semantic HTML and ARIA labels  
+⚡ **High Performance**: Optimized images, code splitting, and fast load times  
+🔍 **SEO Ready**: Metadata, Open Graph tags, and structured data
 
 ## Tech Stack
 
-- **Framework**: Next.js 16 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS v4 + shadcn/ui
-- **Email**: Nodemailer with SMTP
-- **Hosting**: Vercel (recommended)
+- **Frontend**: Next.js 16 (App Router), React, TypeScript
+- **Styling**: Tailwind CSS v4, shadcn/ui components
+- **Backend**: Node.js API routes, Nodemailer for email
+- **Database**: JSON data structures
+- **Hosting**: Vercel
+- **Icons**: Lucide React
 
-## Installation
+## Quick Start
 
 ### Prerequisites
 
-- Node.js 18+ and npm/pnpm/yarn
+- Node.js 18+
+- pnpm, npm, or yarn
 
-### Steps
+### Installation
 
-1. **Clone the repository**
-   \`\`\`bash
-   git clone https://github.com/yourusername/portfolio.git
-   cd portfolio
-   \`\`\`
+```bash
+# Clone the repository
+git clone https://github.com/cassimHamisi/portfolio.git
+cd portfolio
 
-2. **Install dependencies**
-   \`\`\`bash
-   npm install
+# Install dependencies
+pnpm install
 
-   # or
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your SMTP credentials
 
-   pnpm install
+# Run development server
+pnpm dev
+```
 
-   # or
+Visit `http://localhost:3000` to see your changes in real-time.
 
-   yarn install
-   \`\`\`
+### Build & Deploy
 
-3. **Set up environment variables**
-   \`\`\`bash
-   cp .env.example .env.local
-   \`\`\`
+```bash
+# Build for production
+pnpm build
 
-   Edit `.env.local` with your actual values:
+# Start production server locally
+pnpm start
+```
 
-   - **SMTP Configuration**: Set up using Gmail, SendGrid, Mailtrap, or any SMTP provider
-   - For Gmail: Use [App Password](https://support.google.com/accounts/answer/185833) (not your regular password)
+## Project Structure
 
-4. **Run development server**
-   \`\`\`bash
-   npm run dev
-   \`\`\`
+```
+portfolio/
+├── app/                    # Next.js app directory
+│   ├── layout.tsx         # Root layout with providers
+│   ├── page.tsx           # Home page
+│   └── api/               # Server-side API routes
+├── components/            # React components
+│   ├── ui/                # Reusable UI components
+│   ├── about.tsx          # About section
+│   ├── contact.tsx        # Contact form
+│   ├── footer.tsx         # Footer with social links
+│   ├── navigation.tsx     # Header navigation
+│   ├── projects.tsx       # Projects showcase
+│   └── skills.tsx         # Skills section
+├── data/                  # Static data
+│   └── projects.json      # Project information
+├── lib/                   # Utilities
+├── public/                # Static assets
+│   └── images/           # Project images
+├── styles/               # Global styles
+└── types/                # TypeScript type definitions
+```
 
-   Open [http://localhost:3000](http://localhost:3000)
+## Environment Setup
 
-## Email Configuration
+Copy `.env.example` to `.env.local` and add your SMTP credentials:
 
-### Option 1: Gmail (Recommended for testing)
+```bash
+SMTP_HOST=your-smtp-host
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-email
+SMTP_PASS=your-password
+SMTP_FROM=noreply@yourdomain.com
+```
 
-1. Enable 2-Factor Authentication on your Gmail account
-2. Create an [App Password](https://support.google.com/accounts/answer/185833)
-3. Add to `.env.local`:
-   \`\`\`
-   SMTP_HOST=smtp.gmail.com
-   SMTP_PORT=587
-   SMTP_SECURE=false
-   SMTP_USER=your-email@gmail.com
-   SMTP_PASS=your-16-character-app-password
-   SMTP_FROM=your-email@gmail.com
-   \`\`\`
-
-### Option 2: Mailtrap (Best for development)
-
-1. Sign up at [Mailtrap.io](https://mailtrap.io)
-2. Create a new inbox
-3. Copy SMTP credentials from Integration tab
-4. Add to `.env.local`:
-   \`\`\`
-   SMTP_HOST=live.smtp.mailtrap.io
-   SMTP_PORT=587
-   SMTP_SECURE=false
-   SMTP_USER=your-mailtrap-username
-   SMTP_PASS=your-mailtrap-password
-   SMTP_FROM=noreply@yourdomain.com
-   \`\`\`
-
-   ### Option 3: Ethereal (Development-only, no signup)
-
-   Ethereal is a fake SMTP service useful for local development and automated tests. It doesn't deliver real emails — instead it provides a preview URL for each sent message. This avoids sending test mail to real addresses while you develop.
-
-   Example usage with nodemailer (server-side, development):
-
-   ```ts
-   import nodemailer from "nodemailer";
-
-   async function sendTest() {
-     const testAccount = await nodemailer.createTestAccount();
-     const transporter = nodemailer.createTransport({
-       host: testAccount.smtp.host,
-       port: testAccount.smtp.port,
-       secure: testAccount.smtp.secure,
-       auth: {
-         user: testAccount.user,
-         pass: testAccount.pass,
-       },
-     });
-
-     const info = await transporter.sendMail({
-       from: "test@example.com",
-       to: "recipient@example.com",
-       subject: "Hello from Ethereal",
-       text: "This is a test",
-     });
-
-     console.log("Preview URL:", nodemailer.getTestMessageUrl(info));
-   }
-   ```
-
-   Use Ethereal when developing locally. When deploying to Vercel or another host, switch to Mailtrap or your real SMTP provider by setting the variables in `.env.local` or in your hosting environment's secret store.
-
-   ### Important: do not commit secrets
-
-   Always copy `.env.example` to `.env.local` and fill in your private credentials there. Do not commit `.env.local` or any file containing real secrets. On Vercel, configure the same variables under Project → Settings → Environment Variables so they remain secure.
-
-### Option 3: SendGrid, AWS SES, etc.
-
-Refer to your provider's SMTP documentation and update `.env.local` accordingly.
+For testing, use [Mailtrap.io](https://mailtrap.io) (free SMTP service for development).
 
 ## Customization
 
-### Update Project Data
+### Update Projects
 
-Edit `data/projects.json` to add, remove, or modify projects:
+Edit [data/projects.json](data/projects.json) to add or modify projects.
 
-\`\`\`json
-{
-"id": "unique-id",
-"title": "Project Title",
-"shortDescription": "Brief description",
-"longDescription": "Detailed description",
-"tech": ["Tech1", "Tech2"],
-"github": "https://github.com/...",
-"liveDemo": "https://...",
-"images": ["/path/to/image.jpg"],
-"year": 2024,
-"tags": ["tag1", "tag2"]
-}
-\`\`\`
+### Update About Section
 
-### Add Project Images
+Edit [components/about.tsx](components/about.tsx) to personalize your bio.
 
-1. Upload images to `/public/images/projects/`
-2. Reference in `data/projects.json`:
-   \`\`\`json
-   "images": ["/images/projects/project-screenshot.png"]
-   \`\`\`
+### Change Theme Colors
 
-### Theme Colors
-
-Edit `app/globals.css` to customize the color scheme. The design uses:
-
-- **Primary**: `--color-accent` (#0d47a1)
-- **Success**: `--color-success` (#4caf50)
-- **Light**: `--color-background` (#ffffff)
-- **Dark**: `--color-background-dark` (#0f172a)
+Edit [app/globals.css](app/globals.css) for custom color scheme.
 
 ## Deployment
 
-### Vercel (Recommended)
+### Deploy to Vercel (One-click)
 
 1. Push code to GitHub
-2. Connect repository to [Vercel](https://vercel.com)
-3. Add environment variables in Vercel dashboard (Settings > Environment Variables)
-4. Deploy automatically on push
+2. Go to [vercel.com/new](https://vercel.com/new)
+3. Import this repository
+4. Add environment variables in Project Settings
+5. Deploy!
 
-\`\`\`bash
-npm run build
-npm run start
-\`\`\`
+The site will auto-deploy on every push to main branch.
 
 ### Other Platforms
 
-The project is a standard Next.js app compatible with any Node.js hosting:
+- **Netlify**: Connect GitHub repo, add `next-on-netlify`
+- **AWS Amplify**: Connect and deploy
+- **Self-hosted**: Run `pnpm build && pnpm start`
 
-- **Netlify**: Add `next-on-netlify` adapter
-- **AWS Amplify**: Connect GitHub repo
-- **DigitalOcean**: Deploy using App Platform
+## Contributing
 
-## Environment Variables
+This is a personal portfolio. Feel free to fork and adapt for your own use!
 
-| Variable               | Required | Description                    |
-| ---------------------- | -------- | ------------------------------ |
-| `SMTP_HOST`            | Yes      | SMTP server hostname           |
-| `SMTP_PORT`            | Yes      | SMTP port (usually 587 or 465) |
-| `SMTP_SECURE`          | No       | Use TLS (true/false)           |
-| `SMTP_USER`            | Yes      | SMTP username/email            |
-| `SMTP_PASS`            | Yes      | SMTP password/token            |
-| `SMTP_FROM`            | No       | From email address             |
-| `NEXT_PUBLIC_SITE_URL` | No       | Site URL for links             |
+## License
 
-## Performance Optimization
+MIT License - feel free to use this as a template for your own portfolio.
 
-- Images are optimized with `next/image`
-- Non-critical images are lazy-loaded
-- CSS is minified and autoprefixed
-- JavaScript is code-split by route
-- Font loading is optimized with `next/font`
+---
 
-## Accessibility
-
-- Semantic HTML structure
-- ARIA labels on interactive elements
-- Keyboard navigation support
-- Focus-visible outlines
-- Color contrast compliant
-- Skip-to-content link available
-
-## Testing
-
-Test the contact form:
-
-1. Run dev server: `npm run dev`
-2. Navigate to Contact section
-3. Fill out form and submit
-4. Check Mailtrap inbox or email for test message
-
-## SEO
-
-The portfolio includes:
-
-- Dynamic meta tags with project titles/descriptions
-- Open Graph tags for social sharing
-- Structured data (JSON-LD)
-- XML sitemap (auto-generated)
-- Robots.txt configuration
-- Optimized page titles and descriptions
-
-## Browser Support
-
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## Troubleshooting
-
-### Email not sending
-
-1. Check SMTP credentials in `.env.local`
-2. Verify firewall/ISP allows SMTP connections
-3. Check email provider's activity logs
-4. Test with Mailtrap first for debugging
-
-### Images not loading
-
-1. Ensure images exist in `/public/images/`
-2. Check image paths in `data/projects.json`
-3. Verify image formats are supported (jpg, png, webp)
+**Made with ❤️ by Cassim Hamisi | Nairobi, Kenya**
 
 ### Dark mode not persisting
 
