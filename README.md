@@ -94,58 +94,11 @@ portfolio/
 
 ## Environment Setup
 
-Copy `.env.example` to `.env.local` and add your SMTP credentials:
-
-```bash
-SMTP_HOST=your-smtp-host
-SMTP_PORT=587
-SMTP_SECURE=false
-SMTP_USER=your-email
-SMTP_PASS=your-password
-SMTP_FROM=noreply@yourdomain.com
-```
-
-For testing, use [Mailtrap.io](https://mailtrap.io) (free SMTP service for development).
-
-## Customization
-
-### Update Projects
-
-Edit [data/projects.json](data/projects.json) to add or modify projects.
-
-### Update About Section
-
-Edit [components/about.tsx](components/about.tsx) to personalize your bio.
-
-### Change Theme Colors
-
-Edit [app/globals.css](app/globals.css) for custom color scheme.
+Copy `.env.example` to `.env.local` and add your SMTP credentials to enable the contact form.
 
 ## Deployment
 
-### Deploy to Vercel (One-click)
-
-1. Push code to GitHub
-2. Go to [vercel.com/new](https://vercel.com/new)
-3. Import this repository
-4. Add environment variables in Project Settings
-5. Deploy!
-
-The site will auto-deploy on every push to main branch.
-
-### Other Platforms
-
-- **Netlify**: Connect GitHub repo, add `next-on-netlify`
-- **AWS Amplify**: Connect and deploy
-- **Self-hosted**: Run `pnpm build && pnpm start`
-
-## Contributing
-
-This is a personal portfolio. Feel free to fork and adapt for your own use!
-
-## License
-
-MIT License - feel free to use this as a template for your own portfolio.
+This portfolio is deployed on **Vercel** and automatically updates with every push to the main branch.
 
 ---
 
