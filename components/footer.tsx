@@ -45,6 +45,15 @@ export function Footer() {
                 <Github className="w-5 h-5" />
               </a>
               <a
+                href="https://www.linkedin.com/in/cassim-hamisi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-accent transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a
                 href="mailto:cassimjumahamisi2@gmail.com"
                 className="text-muted-foreground hover:text-accent transition-colors"
                 aria-label="Email"
