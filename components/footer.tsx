@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import Link from "next/link";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="py-12 px-4 border-t border-border">
@@ -13,20 +13,30 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">Cassim Hamisi</h3>
             <p className="text-sm text-muted-foreground">
-              Software Engineer specializing in real-time systems and mobile-first architecture.
+              Software Engineer specializing in real-time systems and
+              mobile-first architecture.
             </p>
           </div>
 
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <div className="space-y-2 text-sm">
-              <Link href="#about" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                href="#about"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 About
               </Link>
-              <Link href="#projects" className="block text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                href="#projects"
+                className="block text-muted-foreground hover:text-foreground transition-colors"
+              >
                 Projects
               </Link>
-              <Link href="#contact" className="block text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                href="#contact"
+                className="block text-muted-foreground hover:text-foreground transition-colors"
+              >
                 Contact
               </Link>
             </div>
@@ -69,5 +79,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
